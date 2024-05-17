@@ -1,17 +1,18 @@
 package http
 
 import (
-    "github.com/gofiber/fiber/v2"
-    "cms-config/internal/app/controller"
-    "cms-config/internal/app/usecase"
-    "cms-config/internal/app/repository"
-    "google.golang.org/api/firebaseremoteconfig/v1"
+	"cms-config/internal/app/controller"
+	"cms-config/internal/app/usecase"
+
+	"github.com/gofiber/fiber/v2"
+	"google.golang.org/api/firebaseremoteconfig/v1"
+	"net/http"
 )
 
 func SetupRemoteConfigRoutes(app *fiber.App, firebaseClient *firebaseremoteconfig.Service) {
-    repo := repository.NewFirebaseRepository(firebaseClient)
-    uc := usecase.NewUsecase(repo)
-    controller := controller.NewRemoteConfigController(uc)
+    useCase := usecase.NewUsecase(firebaseClient)
+    remoteConfigController := controller.NewRemoteConfigController(useCase, &http.Client{})
 
-    app.Get("/api/v1/remote-config", controller.GetTemplate)
+    app.Get("/api/v1/remote-config", remoteConfigController.GetTemplate)
+    app.Get("/api/v1/remote-config/:param_name", remoteConfigController.GetDefaultValue)
 }

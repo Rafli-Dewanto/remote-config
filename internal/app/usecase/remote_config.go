@@ -1,34 +1,27 @@
 package usecase
 
 import (
-	"cms-config/internal/app/repository"
-	"fmt"
+	"cms-config/internal/pkg/util"
+
+	log "github.com/sirupsen/logrus"
+	"golang.org/x/oauth2"
+	"google.golang.org/api/firebaseremoteconfig/v1"
 )
 
-type RemoteConfigUsecase interface {
-    GetTemplate() (string, error)
+type RemoteConfigUseCase struct {
+	firebaseClient *firebaseremoteconfig.Service
 }
 
-type usecase struct {
-    repo repository.Repository
+func NewUsecase(firebaseClient *firebaseremoteconfig.Service) *RemoteConfigUseCase {
+	return &RemoteConfigUseCase{
+		firebaseClient: firebaseClient,
+	}
 }
 
-func NewUsecase(repo repository.Repository) RemoteConfigUsecase {
-    return &usecase{
-        repo: repo,
-    }
+func (uc *RemoteConfigUseCase) GetOauthToken() (*oauth2.Token, error) {
+	token, err := util.ServiceAccount("service-account.json")
+	if err != nil {
+		log.Fatalf("Error acquiring token: %v", err)
+	}
+	return token, nil
 }
-
-func (uc *usecase) GetTemplate() (string, error) {
-    // Call repository method to get template
-    template, err := uc.repo.GetTemplate()
-    if err != nil {
-        return "", err
-    }
-		fmt.Println(template)
-		return "", nil
-}
-
-// func processTemplate(template *firebaseremoteconfig.RemoteConfig) string {
-//     // Implement logic to process the template response and convert to string
-// }

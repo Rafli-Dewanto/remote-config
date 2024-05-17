@@ -1,30 +1,40 @@
 {
   "conditions": [
     {
+      "expression": "device.os == 'android' \u0026\u0026 device.country in ['us', 'uk']",
       "name": "android_en",
-      "expression": "device.os == 'android' && device.country in ['us', 'uk']",
       "tagColor": "BLUE"
     }
   ],
   "parameters": {
-    "new_feat": {
+    "new_feat_update": {
       "defaultValue": { "value": "123" },
       "description": "123",
+      "valueType": "STRING"
+    },
+    "new_feat_v2_update": {
+      "defaultValue": { "value": "true" },
+      "description": "ewefefw",
+      "valueType": "BOOLEAN"
+    },
+    "new_feature_update": {
+      "defaultValue": { "value": "false" },
+      "valueType": "BOOLEAN"
+    },
+    "random_name_17": {
+      "defaultValue": { "value": "value" },
+      "description": "desc",
+      "valueType": "STRING"
+    },
+    "random_name_32": {
+      "defaultValue": { "value": "value" },
+      "description": "desc",
       "valueType": "STRING"
     },
     "tes_param": {
       "defaultValue": { "value": "value" },
       "description": "desc",
       "valueType": "STRING"
-    },
-    "new_feature_update": {
-      "defaultValue": { "value": "false" },
-      "valueType": "BOOLEAN"
-    },
-    "new_feat_v2_update": {
-      "defaultValue": { "value": "true" },
-      "description": "ewefefw",
-      "valueType": "BOOLEAN"
     },
     "test_1234": {
       "defaultValue": { "value": "123" },
@@ -35,27 +45,15 @@
       "defaultValue": { "value": "test123" },
       "description": "123",
       "valueType": "STRING"
-    },
-    "random_name_32": {
-      "defaultValue": { "value": "value" },
-      "description": "desc",
-      "valueType": "STRING"
-    },
-    "random_name_17": {
-      "defaultValue": { "value": "value" },
-      "description": "desc",
-      "valueType": "STRING"
     }
   },
-  "parameterGroups": {},
-  "etag": "etag-695800008710-104",
   "version": {
-    "versionNumber": "104",
     "updateOrigin": "ADMIN_SDK_NODE",
+    "updateTime": "2024-05-16T03:57:51.681081Z",
     "updateType": "INCREMENTAL_UPDATE",
     "updateUser": {
       "email": "firebase-adminsdk-4ip1o@cms-content-generator-3305b.iam.gserviceaccount.com"
     },
-    "updateTime": "Fri, 03 May 2024 08:58:07 GMT"
+    "versionNumber": "105"
   }
 }
